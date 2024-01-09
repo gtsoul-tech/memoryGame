@@ -3,6 +3,8 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  display: flex;
+  height: 100vh;
 }
 
 .logo {
@@ -39,4 +41,37 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.display{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.headline{
+  display: flex;
+  gap: 10px;
+  color: rgb(255, 166, 0);
+  text-align: start;
+  padding-bottom: 20px;
+}
+.title{
+  font-size: x-large;
+  font-weight: 1000;
+}
+.subtitle{
+  font-size: smaller;
+}
+.headDiv{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cards{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 }
