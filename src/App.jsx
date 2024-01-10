@@ -9,19 +9,23 @@ function App() {
   const [memory,setMemory]= useState([''])
   const [pokemons, setPokemons] = useState([]);
   const [error, setError] = useState(undefined);
+  const shuffle = (array) => {
+    array.sort(() => Math.random() - 0.5);
+  }
   useEffect( () => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=10");
+        const random_offset = Math.floor(Math.random()* 1000) + 1;
+        const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=10&offset=" + random_offset);
         const data = await response.json();
+
         setPokemons(data.results);
-        console.log(data.results);
       } catch (e){
         setError(e.message || "Something went wrong");
       }
     };
     fetchData();
-  }, [])
+  }, [bestScore])
   if (error) {
     return <div>{error}</div>
   }
@@ -31,9 +35,11 @@ function App() {
     if(memory.includes(name)){   //exw pathsei ksana thn karta
       handleResetMemory()
       handleScore(e,true)
+      shuffle(pokemons);
     }else{
       handleAddMemory(name)
       handleScore(e,false)
+      shuffle(pokemons);
     }
   }
   function handleAddMemory(name){
@@ -69,6 +75,7 @@ function App() {
           <Card
           handleClick={handleClick}
           name={name}
+          url={url}
           key={url}>{name}</Card>
         ))}
       </div>
